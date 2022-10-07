@@ -97,7 +97,7 @@ namespace Week4
                 values[counter, 5] = f.NumberOfRooms;
                 values[counter, 6] = f.FloorArea;
                 values[counter, 7] = f.Price;
-                values[counter, 8] = "="+counter.ToString()+"7/"+counter.ToString()+"6";
+                values[counter, 8] = "=H"+(counter+2).ToString()+"/G"+(counter+2).ToString();
                 counter++;
             }
 
