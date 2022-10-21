@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 
 namespace okt21_a5yk9z
@@ -22,6 +23,7 @@ namespace okt21_a5yk9z
             InitializeComponent();
             dataGridView1.DataSource = Rates;
             ParseXML(InitService());
+            PlotData();
         }
 
         private string InitService() {
@@ -78,6 +80,27 @@ namespace okt21_a5yk9z
                     rate.Value = value / unit;
             }
         }
+
+        private void PlotData() {
+            chart1.DataSource = Rates;
+
+            var series = chart1.Series[0];
+            series.ChartType = SeriesChartType.Line;
+            series.XValueMember = "Date";
+            series.YValueMembers = "Value";
+            series.BorderWidth = 2;
+
+            var legend = chart1.Legends[0];
+            legend.Enabled = false;
+
+            var chartArea = chart1.ChartAreas[0];
+            chartArea.AxisX.MajorGrid.Enabled = false;
+            chartArea.AxisY.MajorGrid.Enabled = false;
+            chartArea.AxisY.IsStartedFromZero = false;
+
+        }
+
+
 
     }
 }
