@@ -23,10 +23,15 @@ namespace okt21_a5yk9z
         {
             InitializeComponent();
 
-            //init datagrid, combobox
             dataGridView1.DataSource = Rates;
-
             comboBox1.DataSource = Currencies;
+            LoadCurrencyNames();
+            
+
+            RefreshData();
+        }
+
+        private void LoadCurrencyNames() {
             var mnbService = new MNBArfolyamServiceSoapClient();
             var request = new GetCurrenciesRequestBody();
 
@@ -39,13 +44,9 @@ namespace okt21_a5yk9z
             foreach (XmlElement element in xml.DocumentElement.FirstChild.ChildNodes)
             {
                 Currencies.Add(element.InnerText);
-            
+
             }
 
-            //MessageBox.Show(result);
-
-
-            RefreshData();
         }
 
         private void RefreshData() {
