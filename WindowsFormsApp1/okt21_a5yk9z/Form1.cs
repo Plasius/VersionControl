@@ -22,6 +22,11 @@ namespace okt21_a5yk9z
         {
             InitializeComponent();
             dataGridView1.DataSource = Rates;
+            RefreshData();
+        }
+
+        private void RefreshData() {
+            Rates.Clear();
             ParseXML(InitService());
             PlotData();
         }
@@ -31,14 +36,22 @@ namespace okt21_a5yk9z
             // A "var" változó az első értékadás pillanatában a kapott érték típusát veszi fel, és később nem változtatható.
             // Jelen példa első sora tehát ekvivalens azzal, ha a "var" helyélre a MNBArfolyamServiceSoapClient-t írjuk.
             // Ebben a formában azonban olvashatóbb a kód, és változtatás esetén elég egy helyen átírni az osztály típusát.
+
+            if (comboBox1.SelectedItem == null)
+                comboBox1.SelectedItem = "EUR";
+
+
             var mnbService = new MNBArfolyamServiceSoapClient();
+
+
 
             var request = new GetExchangeRatesRequestBody()
             {
-                currencyNames = "EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30"
+                currencyNames = comboBox1.SelectedItem.ToString(),
+                startDate = dateTimePicker1.Value.ToString(),
+                endDate = dateTimePicker2.Value.ToString()
             };
+
 
             // Ebben az esetben a "var" a GetExchangeRates visszatérési értékéből kapja a típusát.
             // Ezért a response változó valójában GetExchangeRatesResponseBody típusú.
@@ -100,7 +113,19 @@ namespace okt21_a5yk9z
 
         }
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
 
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
     }
 }
