@@ -17,17 +17,42 @@ namespace okt21_a5yk9z
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
 
         public Form1()
         {
             InitializeComponent();
+
+            //init datagrid, combobox
             dataGridView1.DataSource = Rates;
+
+            comboBox1.DataSource = Currencies;
+            var mnbService = new MNBArfolyamServiceSoapClient();
+            var request = new GetCurrenciesRequestBody();
+
+            var result = mnbService.GetCurrencies(request).GetCurrenciesResult;
+
+
+            var xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            foreach (XmlElement element in xml.DocumentElement.FirstChild.ChildNodes)
+            {
+                Currencies.Add(element.InnerText);
+            
+            }
+
+            //MessageBox.Show(result);
+
+
             RefreshData();
         }
 
         private void RefreshData() {
             Rates.Clear();
+
             ParseXML(InitService());
+
             PlotData();
         }
 
@@ -37,8 +62,6 @@ namespace okt21_a5yk9z
             // Jelen példa első sora tehát ekvivalens azzal, ha a "var" helyélre a MNBArfolyamServiceSoapClient-t írjuk.
             // Ebben a formában azonban olvashatóbb a kód, és változtatás esetén elég egy helyen átírni az osztály típusát.
 
-            if (comboBox1.SelectedItem == null)
-                comboBox1.SelectedItem = "EUR";
 
 
             var mnbService = new MNBArfolyamServiceSoapClient();
@@ -48,7 +71,7 @@ namespace okt21_a5yk9z
             var request = new GetExchangeRatesRequestBody()
             {
                 currencyNames = comboBox1.SelectedItem.ToString(),
-                startDate = dateTimePicker1.Value.ToString(),
+                startDate = dateTimePicker1.Value.ToString(), //datetimeok egybol mukodnek?
                 endDate = dateTimePicker2.Value.ToString()
             };
 
@@ -62,6 +85,7 @@ namespace okt21_a5yk9z
             var result = response.GetExchangeRatesResult;
 
             //MessageBox.Show(result);
+
             return result;
 
         }
@@ -71,9 +95,11 @@ namespace okt21_a5yk9z
             var xml = new XmlDocument();
             xml.LoadXml(result);
 
+
             // Végigmegünk a dokumentum fő elemének gyermekein
             foreach (XmlElement element in xml.DocumentElement)
             {
+
                 // Létrehozzuk az adatsort és rögtön hozzáadjuk a listához
                 // Mivel ez egy referencia típusú változó, megtehetjük, hogy előbb adjuk a listához és csak később töltjük fel a tulajdonságait
                 var rate = new RateData();
@@ -84,6 +110,9 @@ namespace okt21_a5yk9z
 
                 // Valuta
                 var childElement = (XmlElement)element.ChildNodes[0];
+
+                if (childElement == null)
+                    continue;
                 rate.Currency = childElement.GetAttribute("curr");
 
                 // Érték
