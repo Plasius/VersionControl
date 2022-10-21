@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace okt21_a5yk9z
 {
@@ -20,10 +21,10 @@ namespace okt21_a5yk9z
         {
             InitializeComponent();
             dataGridView1.DataSource = Rates;
-            InitService();
+            ParseXML(InitService());
         }
 
-        private void InitService() {
+        private string InitService() {
             // A változó deklarációk jobb oldalán a "var" egy dinamikus változó típus.
             // A "var" változó az első értékadás pillanatában a kapott érték típusát veszi fel, és később nem változtatható.
             // Jelen példa első sora tehát ekvivalens azzal, ha a "var" helyélre a MNBArfolyamServiceSoapClient-t írjuk.
@@ -46,7 +47,37 @@ namespace okt21_a5yk9z
             var result = response.GetExchangeRatesResult;
 
             //MessageBox.Show(result);
+            return result;
 
         }
+
+        private void ParseXML(string result) {
+            // XML document létrehozása és az aktuális XML szöveg betöltése
+            var xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            // Végigmegünk a dokumentum fő elemének gyermekein
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                // Létrehozzuk az adatsort és rögtön hozzáadjuk a listához
+                // Mivel ez egy referencia típusú változó, megtehetjük, hogy előbb adjuk a listához és csak később töltjük fel a tulajdonságait
+                var rate = new RateData();
+                Rates.Add(rate);
+
+                // Dátum
+                rate.Date = DateTime.Parse(element.GetAttribute("date"));
+
+                // Valuta
+                var childElement = (XmlElement)element.ChildNodes[0];
+                rate.Currency = childElement.GetAttribute("curr");
+
+                // Érték
+                var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                var value = decimal.Parse(childElement.InnerText);
+                if (unit != 0)
+                    rate.Value = value / unit;
+            }
+        }
+
     }
 }
