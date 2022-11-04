@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "Windows
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okt21_a5yk9z", "okt21_a5yk9z\okt21_a5yk9z.csproj", "{99139417-3012-4840-A218-2C3F346268F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Santa", "Santa\Santa.csproj", "{BAD73DDD-7A8C-4EEA-BC5A-C49243D74494}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{99139417-3012-4840-A218-2C3F346268F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99139417-3012-4840-A218-2C3F346268F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99139417-3012-4840-A218-2C3F346268F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD73DDD-7A8C-4EEA-BC5A-C49243D74494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD73DDD-7A8C-4EEA-BC5A-C49243D74494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD73DDD-7A8C-4EEA-BC5A-C49243D74494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD73DDD-7A8C-4EEA-BC5A-C49243D74494}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
