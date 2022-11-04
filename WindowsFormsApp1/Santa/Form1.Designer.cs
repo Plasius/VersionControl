@@ -36,6 +36,9 @@
             this.ballButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.colorButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.boxColorButton = new System.Windows.Forms.Button();
+            this.ribbonColorButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -80,7 +83,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(335, 9);
+            this.label1.Location = new System.Drawing.Point(457, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 16);
             this.label1.TabIndex = 3;
@@ -88,18 +91,52 @@
             // 
             // colorButton
             // 
-            this.colorButton.Location = new System.Drawing.Point(171, 119);
+            this.colorButton.BackColor = System.Drawing.Color.Red;
+            this.colorButton.Location = new System.Drawing.Point(162, 96);
             this.colorButton.Name = "colorButton";
             this.colorButton.Size = new System.Drawing.Size(75, 23);
             this.colorButton.TabIndex = 4;
-            this.colorButton.UseVisualStyleBackColor = true;
+            this.colorButton.UseVisualStyleBackColor = false;
             this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(280, 52);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(101, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "PRESENT";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // boxColorButton
+            // 
+            this.boxColorButton.BackColor = System.Drawing.Color.Lime;
+            this.boxColorButton.Location = new System.Drawing.Point(280, 96);
+            this.boxColorButton.Name = "boxColorButton";
+            this.boxColorButton.Size = new System.Drawing.Size(101, 23);
+            this.boxColorButton.TabIndex = 6;
+            this.boxColorButton.UseVisualStyleBackColor = false;
+            this.boxColorButton.Click += new System.EventHandler(this.colorButton_Click);
+            // 
+            // ribbonColorButton
+            // 
+            this.ribbonColorButton.BackColor = System.Drawing.Color.Red;
+            this.ribbonColorButton.Location = new System.Drawing.Point(280, 137);
+            this.ribbonColorButton.Name = "ribbonColorButton";
+            this.ribbonColorButton.Size = new System.Drawing.Size(101, 23);
+            this.ribbonColorButton.TabIndex = 7;
+            this.ribbonColorButton.UseVisualStyleBackColor = false;
+            this.ribbonColorButton.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ribbonColorButton);
+            this.Controls.Add(this.boxColorButton);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.colorButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ballButton);
@@ -121,6 +158,9 @@
         private System.Windows.Forms.Button ballButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button colorButton;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button boxColorButton;
+        private System.Windows.Forms.Button ribbonColorButton;
     }
 }
 
