@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Santa.Entities
 {
-    public class BallFactory : IToyFactory
+    internal class CarFactory : IToyFactory
     {
         public Toy CreateNew()
         {
-            return new Ball();
+            return new Car();
         }
     }
 }
