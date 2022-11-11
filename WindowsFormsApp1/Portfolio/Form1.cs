@@ -87,9 +87,13 @@ namespace Portfolio
 
                 using (StreamWriter writer = new StreamWriter(saveFileDialog1.FileName))
                 {
+                    int index = 0;
+                    writer.WriteLine("Időszak," + "Nyereség");
+
                     foreach (decimal gain in Nyereségek)
                     {
-                        writer.Write(gain+" ");
+                        writer.WriteLine(index.ToString()+" "+gain.ToString());
+                        index++;
                     }
                 }
                 MessageBox.Show("Nyeresegek saved");
