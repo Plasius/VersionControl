@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Portfolio
 {
@@ -16,6 +18,7 @@ namespace Portfolio
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        List<decimal> Nyereségek = new List<decimal>();
 
         public Form1()
         {
@@ -24,7 +27,7 @@ namespace Portfolio
             dataGridView1.DataSource = Ticks;
             CreatePortfolio();
 
-            List<decimal> Nyereségek = new List<decimal>();
+            
             int intervalum = 30;
             DateTime kezdőDátum = (from x in Ticks select x.TradingDay).Min();
             DateTime záróDátum = new DateTime(2016, 12, 30);
@@ -67,5 +70,32 @@ namespace Portfolio
             }
             return value;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = "C:\\";
+            saveFileDialog1.Title = "Save Gains";
+            saveFileDialog1.CheckPathExists = true;
+            saveFileDialog1.DefaultExt = "txt";
+            saveFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                using (StreamWriter writer = new StreamWriter(saveFileDialog1.FileName))
+                {
+                    foreach (decimal gain in Nyereségek)
+                    {
+                        writer.Write(gain+" ");
+                    }
+                }
+                MessageBox.Show("Nyeresegek saved");
+            }
+            
+        }
+
     }
 }
