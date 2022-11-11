@@ -92,7 +92,7 @@ namespace Portfolio
 
                     foreach (decimal gain in Nyereségek)
                     {
-                        writer.WriteLine(index.ToString()+" "+gain.ToString());
+                        writer.WriteLine(index.ToString()+","+gain.ToString());
                         index++;
                     }
                 }
