@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Santa", "Santa\Santa.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio", "Portfolio\Portfolio.csproj", "{34B175EF-B691-4575-9870-07A1E74F919D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kshsimulation", "kshsimulation\kshsimulation.csproj", "{CD366DAF-635D-4A3D-9491-85A7935257B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{34B175EF-B691-4575-9870-07A1E74F919D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34B175EF-B691-4575-9870-07A1E74F919D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34B175EF-B691-4575-9870-07A1E74F919D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD366DAF-635D-4A3D-9491-85A7935257B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD366DAF-635D-4A3D-9491-85A7935257B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD366DAF-635D-4A3D-9491-85A7935257B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD366DAF-635D-4A3D-9491-85A7935257B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
