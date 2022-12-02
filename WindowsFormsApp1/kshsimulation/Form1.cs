@@ -23,16 +23,20 @@ namespace kshsimulation
         public Form1()
         {
             InitializeComponent();
+
+            numericUpDown1.Value = 2025;
+
         }
 
         private void StartSimulation() {
-            Population = GetPopulation(@"C:\Temp\nép.csv");
+
+            Population = GetPopulation(textBox1.Text);
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
 
             //simulation
             // Végigmegyünk a vizsgált éveken
-            for (int year = 2005; year <= 2024; year++)
+            for (int year = 2005; year <= (int)numericUpDown1.Value; year++)
             {
                 // Végigmegyünk az összes személyen
                 for (int i = 0; i < Population.Count; i++)
@@ -47,8 +51,9 @@ namespace kshsimulation
                 int nbrOfFemales = (from x in Population
                                     where x.Gender == Gender.Female && x.IsAlive
                                     select x).Count();
-                Console.WriteLine(
-                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+
+                richTextBox1.Text += string.Format("Év:{0} \n\t Fiúk:{1} \n\t Lányok:{2}\n\n", year, nbrOfMales, nbrOfFemales);
+
             }
         }
 
@@ -151,6 +156,31 @@ namespace kshsimulation
                     Population.Add(újszülött);
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //browse path
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\Temp";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    textBox1.Text = openFileDialog.FileName;
+
+                }
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            richTextBox1.Text = "";
+            StartSimulation();
         }
     }
 }
